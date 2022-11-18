@@ -1,55 +1,52 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
-class RandomChar extends Component {
-	constructor(props) {
-		super(props);
-		this.updateChar();
-	}
-	state = {
-		char: {},
-		loading: true
-	}
-	marvelService = new MarvelService();
+const RandomChar = (props) => {
 
-	onCharLoaded = (char) => {
-		this.setState({
-			char,
-			loading: false
-		});
+
+	const [char, setChar] = useState({});
+	const [loading, setLoading] = useState(true);
+
+	const marvelService = new MarvelService();
+
+	useEffect(() => {
+		updateChar();
+	}, [])
+
+	const onCharLoaded = (char) => {
+		setChar(char)
+		setLoading(false)
 	}
 
-	updateChar = () => {
-		this.setState({ loading: true });
+	const updateChar = () => {
+		setLoading(true);
 		const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-		this.marvelService
-			.getCharacter(id).then(this.onCharLoaded);
+		marvelService.getCharacter(id)
+			.then(onCharLoaded);
 	}
 
-	render() {
-		const { char, loading } = this.state;
-		return (
-			<div className="randomchar" >
-				{loading ? <Spinner /> : <View char={char} />}
-				<div className="randomchar__static">
-					<p className="randomchar__title">
-						Random character for today!<br />
-						Do you want to get to know him better?
-					</p>
-					<p className="randomchar__title">
-						Or choose another one
-					</p>
-					<button onClick={this.updateChar} className="button button__main">
-						<div className="inner">try it</div>
-					</button>
-					<img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
-				</div>
+	return (
+		<div className="randomchar" >
+			{loading ? <Spinner /> : <View char={char} />}
+			<div className="randomchar__static">
+				<p className="randomchar__title">
+					Random character for today!<br />
+					Do you want to get to know him better?
+				</p>
+				<p className="randomchar__title">
+					Or choose another one
+				</p>
+				<button onClick={updateChar} className="button button__main">
+					<div className="inner">try it</div>
+				</button>
+				<img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
 			</div>
-		)
-	}
+		</div>
+	)
+
 }
 
 const View = ({ char }) => {
