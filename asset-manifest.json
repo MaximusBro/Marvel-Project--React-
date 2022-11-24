@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/Marvel-Project--React-/static/css/main.f2792bc8.chunk.css",
-    "main.js": "/Marvel-Project--React-/static/js/main.1a70facb.chunk.js",
-    "main.js.map": "/Marvel-Project--React-/static/js/main.1a70facb.chunk.js.map",
+    "main.css": "/Marvel-Project--React-/static/css/main.44c030e9.chunk.css",
+    "main.js": "/Marvel-Project--React-/static/js/main.ca343661.chunk.js",
+    "main.js.map": "/Marvel-Project--React-/static/js/main.ca343661.chunk.js.map",
     "runtime-main.js": "/Marvel-Project--React-/static/js/runtime-main.e10ddb1e.js",
     "runtime-main.js.map": "/Marvel-Project--React-/static/js/runtime-main.e10ddb1e.js.map",
-    "static/js/2.a26fdf47.chunk.js": "/Marvel-Project--React-/static/js/2.a26fdf47.chunk.js",
-    "static/js/2.a26fdf47.chunk.js.map": "/Marvel-Project--React-/static/js/2.a26fdf47.chunk.js.map",
+    "static/js/2.fde3164e.chunk.js": "/Marvel-Project--React-/static/js/2.fde3164e.chunk.js",
+    "static/js/2.fde3164e.chunk.js.map": "/Marvel-Project--React-/static/js/2.fde3164e.chunk.js.map",
     "index.html": "/Marvel-Project--React-/index.html",
-    "static/css/main.f2792bc8.chunk.css.map": "/Marvel-Project--React-/static/css/main.f2792bc8.chunk.css.map",
-    "static/js/2.a26fdf47.chunk.js.LICENSE.txt": "/Marvel-Project--React-/static/js/2.a26fdf47.chunk.js.LICENSE.txt",
+    "static/css/main.44c030e9.chunk.css.map": "/Marvel-Project--React-/static/css/main.44c030e9.chunk.css.map",
+    "static/js/2.fde3164e.chunk.js.LICENSE.txt": "/Marvel-Project--React-/static/js/2.fde3164e.chunk.js.LICENSE.txt",
     "static/media/error.42292aa1.gif": "/Marvel-Project--React-/static/media/error.42292aa1.gif",
     "static/media/mjolnir.61f31e18.png": "/Marvel-Project--React-/static/media/mjolnir.61f31e18.png",
-    "static/media/vision.067d4ae1.png": "/Marvel-Project--React-/static/media/vision.067d4ae1.png"
+    "static/media/vision.067d4ae1.png": "/Marvel-Project--React-/static/media/vision.067d4ae1.png",
+    "static/media/x-men.41b39e19.png": "/Marvel-Project--React-/static/media/x-men.41b39e19.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e10ddb1e.js",
-    "static/js/2.a26fdf47.chunk.js",
-    "static/css/main.f2792bc8.chunk.css",
-    "static/js/main.1a70facb.chunk.js"
+    "static/js/2.fde3164e.chunk.js",
+    "static/css/main.44c030e9.chunk.css",
+    "static/js/main.ca343661.chunk.js"
   ]
 }
