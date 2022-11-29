@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
+import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
-const RandomChar = (props) => {
-
+const RandomChar = () => {
 
 	const [char, setChar] = useState({});
-	const [loading, setLoading] = useState(true);
 
-	const marvelService = new MarvelService();
+
+	const { loading, error, clearError, getCharacter } = useMarvelService();
 
 	useEffect(() => {
 		updateChar();
@@ -18,19 +18,23 @@ const RandomChar = (props) => {
 
 	const onCharLoaded = (char) => {
 		setChar(char)
-		setLoading(false)
 	}
 
 	const updateChar = () => {
-		setLoading(true);
+		clearError();
 		const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-		marvelService.getCharacter(id)
+		getCharacter(id)
 			.then(onCharLoaded);
 	}
 
+	const errorMessage = error ? <ErrorBoundary /> : null;
+	const spinner = loading ? <Spinner /> : null;
+	const content = !(loading || error || !char) ? <View char={char} /> : null;
 	return (
 		<div className="randomchar" >
-			{loading ? <Spinner /> : <View char={char} />}
+			{errorMessage}
+			{spinner}
+			{content}
 			<div className="randomchar__static">
 				<p className="randomchar__title">
 					Random character for today!<br />
@@ -46,10 +50,10 @@ const RandomChar = (props) => {
 			</div>
 		</div>
 	)
-
 }
 
 const View = ({ char }) => {
+
 	let { name, description, thumbnail, homepage, wiki } = char;
 	if (!description) {
 		description = "Data not found";
@@ -57,10 +61,12 @@ const View = ({ char }) => {
 		console.log(description);
 		description = `${description.slice(0, 200)}${"..."}`;
 	}
+
 	let imgStyle = { 'objectFit': 'cover' };
 	if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
 		imgStyle = { 'objectFit': 'contain' };
 	}
+
 	return (
 		<div className="randomchar__block">
 			<img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle} />
@@ -81,5 +87,4 @@ const View = ({ char }) => {
 		</div>
 	)
 }
-
 export default RandomChar;
