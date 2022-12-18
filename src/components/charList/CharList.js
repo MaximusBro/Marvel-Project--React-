@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PropTypes from "prop-types";
 import Spinner from '../spinner/Spinner';
 import useMarvelService from '../../services/MarvelService';
@@ -12,7 +12,6 @@ const CharList = (props) => {
 	const [offset, setOffset] = useState(210);
 	const [charEnded, setCharEnded] = useState(false);
 
-
 	const { loading, error, getAllCharacters } = useMarvelService();
 
 	useEffect(() => {
@@ -20,7 +19,6 @@ const CharList = (props) => {
 		console.log("render")
 	}, []);
 
-	console.log("charlist");
 
 	const onRequest = (offset, initial) => {
 		initial ? setNewItemLoading(false) : setNewItemLoading(true);
@@ -49,6 +47,7 @@ const CharList = (props) => {
 	}
 
 	function renderItems(arr) {
+
 		const items = arr.map((item, index) => {
 			let imgStyle = { 'objectFit': 'cover' };
 			if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
@@ -56,24 +55,28 @@ const CharList = (props) => {
 			}
 
 			return (
-				<li
-					className="char__item"
-					ref={el => itemRefs.current[index] = el}
-					key={item.id}
-					onClick={() => {
-						props.onCharSelected(item.id);
-						focusOnItem(index);
-					}
-					}>
-					<img src={item.thumbnail} alt={item.name} style={imgStyle} />
-					<div className="char__name">{item.name}</div>
-				</li >
+				<CSSTransition key={item.id} timeout={500} classNames="char__item">
+					<li
+						className="char__item"
+						ref={el => itemRefs.current[index] = el}
+						onClick={() => {
+							props.onCharSelected(item.id);
+							focusOnItem(index);
+						}
+						}>
+						<img src={item.thumbnail} alt={item.name} style={imgStyle} />
+						<div className="char__name">{item.name}</div>
+					</li >
+				</CSSTransition>
+
 			)
 		});
 		// А эта конструкция вынесена для центровки спиннера/ошибки
 		return (
 			<ul className="char__grid">
-				{items}
+				<TransitionGroup component={null}>
+					{items}
+				</TransitionGroup>
 			</ul>
 		)
 	}
